@@ -8,12 +8,16 @@ jobs:
             matrix:
                 python-version: [3.10, 3.11]
         steps:
-            - uses: actions/checkout@main
+            - name: Checkout Main
+              uses: actions/checkout@main
+            
             - name: Setup Pyhon
-            - uses: actions/setup-python@v1
-            with:
-                python-version: ${{matrix.python-version}}
-                architecture: x64
-            run: |
-                pip -m install -r requirements.txt
-                pip -m unittest discover
+              uses: actions/setup-python@v3
+              with:
+                  python-version: ${{matrix.python-version}}
+                  architecture: x64
+            
+            - name: Run tests
+              run: |
+                  pip -m install -r requirements.txt
+                  pip -m unittest discover
