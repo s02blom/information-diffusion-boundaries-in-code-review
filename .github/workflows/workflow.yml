@@ -20,4 +20,5 @@ jobs:
             - name: Run tests
               run: |
                   pip install -r requirements.txt
-                  pip unittest discover
+                  python test/test_minimal_paths.py
+                  python test/test_model.py
