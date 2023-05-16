@@ -1,6 +1,6 @@
 import unittest
 
-from .model import CommunicationNetwork
+from simulation.model import CommunicationNetwork
 
 
 class ModelTest(unittest.TestCase):
