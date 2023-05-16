@@ -11,7 +11,12 @@ class DistanceType(Enum):
     FOREMOST = 2
 
 
-def single_source_dijkstra_hyperedges(hypergraph: TimeVaryingHypergraph, source_vertex, distance_type: DistanceType, min_timing=datetime.min):
+def single_source_dijkstra_hyperedges(
+    hypergraph: TimeVaryingHypergraph,
+    source_vertex,
+    distance_type: DistanceType,
+    min_timing=datetime.min,
+):
     hedge_distances: dict = {}
     queue: list = []
 
@@ -37,10 +42,15 @@ def single_source_dijkstra_hyperedges(hypergraph: TimeVaryingHypergraph, source_
                         case DistanceType.SHORTEST:
                             new_distance = prior_distance + 1
                         case DistanceType.FASTEST:
-                            new_distance = prior_distance + (next_hedge_timing - source_hedge_timing)
+                            new_distance = prior_distance + (
+                                next_hedge_timing - source_hedge_timing
+                            )
                         case DistanceType.FOREMOST:
                             new_distance = next_hedge_timing
-                    if next_hedge not in hedge_distances or new_distance < hedge_distances[next_hedge]:
+                    if (
+                        next_hedge not in hedge_distances
+                        or new_distance < hedge_distances[next_hedge]
+                    ):
                         hedge_distances[next_hedge] = new_distance
                         heapq.heappush(queue, (new_distance, next_hedge))
 
@@ -53,7 +63,12 @@ def single_source_dijkstra_hyperedges(hypergraph: TimeVaryingHypergraph, source_
     return vertex_distances
 
 
-def single_source_dijkstra_vertices(hypergraph: TimeVaryingHypergraph, source_vertex, distance_type: DistanceType, min_timing=datetime.min):
+def single_source_dijkstra_vertices(
+    hypergraph: TimeVaryingHypergraph,
+    source_vertex,
+    distance_type: DistanceType,
+    min_timing=datetime.min,
+):
     distances: dict = {}
     queue: list = []
 
@@ -86,10 +101,15 @@ def single_source_dijkstra_vertices(hypergraph: TimeVaryingHypergraph, source_ve
                         case DistanceType.SHORTEST:
                             new_distance = distance + 1
                         case DistanceType.FASTEST:
-                            new_distance = distance + (next_hedge_timing - source_hedge_timing)
+                            new_distance = distance + (
+                                next_hedge_timing - source_hedge_timing
+                            )
                         case DistanceType.FOREMOST:
                             new_distance = next_hedge_timing
-                    if new_reachable not in distances or new_distance < distances[new_reachable]:
+                    if (
+                        new_reachable not in distances
+                        or new_distance < distances[new_reachable]
+                    ):
                         distances[new_reachable] = new_distance
                         heapq.heappush(queue, (new_distance, new_reachable))
     minimal_distances: dict = {}
