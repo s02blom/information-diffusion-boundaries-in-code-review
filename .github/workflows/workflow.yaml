@@ -1,5 +1,5 @@
 name: Main Workflow
-run-name: Started by ${{github.actor}}, for push ${{GITHUB_REF}}
+run-name: Started by ${{github.actor}}, for push ${{github.event_name}}
 on: [push]
 jobs:
     run-tests:
@@ -8,7 +8,7 @@ jobs:
             matrix:
                 python-version: ['3.10', '3.11']
         steps:
-            - name: Checkout ${{GITHUB_REF}}
+            - name: Checkout Main
               uses: actions/checkout@main
             
             - name: Setup Pyhon
@@ -17,7 +17,9 @@ jobs:
                   python-version: ${{matrix.python-version}}
                   architecture: x64
             
+            - name: Install requirments
+              run: pip install -r requirements.txt
+            
             - name: Run tests
-              run: |
-                  pip install -r requirements.txt
-                  python -m unittest discover
+              run: python -m unittest discover
+                  
