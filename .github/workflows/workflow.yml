@@ -1,0 +1,24 @@
+name: Main Workflow
+run-name: Started by ${{github.actor}}, for push ${{github.event_name}}
+on: [push]
+jobs:
+    run-tests:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                python-version: ['3.10', '3.11']
+        steps:
+            - name: Checkout Main
+              uses: actions/checkout@main
+            
+            - name: Setup Pyhon
+              uses: actions/setup-python@v3
+              with:
+                  python-version: ${{matrix.python-version}}
+                  architecture: x64
+            
+            - name: Run tests
+              run: |
+                  pip install -r requirements.txt
+                  python test/test_minimal_paths.py
+                  python test/test_model.py
