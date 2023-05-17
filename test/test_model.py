@@ -28,6 +28,12 @@ class self(unittest.TestCase):
         self.assertEqual(len(self.empty_cn.hyperedges()), 1)
         self.assertEqual(self.empty_cn.hyperedges("v1"), {"h1"})
 
+    def test_invalid_vertices(self):
+        pass
+
+    def test_invalid_hyperedges(self):
+        pass
+
 
 class ModelDataTest(unittest.TestCase):
     def test_model_with_data(self):

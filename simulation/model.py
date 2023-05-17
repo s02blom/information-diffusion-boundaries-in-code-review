@@ -33,18 +33,17 @@ class TimeVaryingHypergraph:
             return set(self._vertices)
         if hedge in self._hedges:
             return set(self._hedges[hedge])
-        raise EntityNotFound(f'Unknown hyperedge {hedge}')
+        raise EntityNotFound(f"Un   known hyperedge {hedge}")
 
     def hyperedges(self, vertex=None):
         if vertex is None:
             return set(self._hedges)
         if vertex in self._vertices:
             return set(self._vertices[vertex])
-        raise EntityNotFound(f'Unknown vertex {vertex}')
+        raise EntityNotFound(f"Unknown vertex {vertex}")
 
 
 class CommunicationNetwork(TimeVaryingHypergraph):
-
     def __init__(self, channels, channel_timings, name=None):
         super().__init__(channels, channel_timings)
         self.name = name
@@ -58,12 +57,18 @@ class CommunicationNetwork(TimeVaryingHypergraph):
     @classmethod
     def from_json(cls, file_path, name=None):
         file_path = Path(file_path)
-        with file_path.open('rb') as file:
-            if file_path.suffix == '.bz2':
+        with file_path.open("rb") as file:
+            if file_path.suffix == ".bz2":
                 raw_data = json.loads(bz2.decompress(file.read()))
             else:
                 raw_data = json.loads(file.read())
-            hedges = {str(chan_id): set(channel['participants']) for chan_id, channel in raw_data.items()}
-            timings = {str(chan_id): datetime.fromisoformat(channel['end']) for chan_id, channel in raw_data.items()}
+            hedges = {
+                str(chan_id): set(channel["participants"])
+                for chan_id, channel in raw_data.items()
+            }
+            timings = {
+                str(chan_id): datetime.fromisoformat(channel["end"])
+                for chan_id, channel in raw_data.items()
+            }
 
         return cls(hedges, timings, name=name)

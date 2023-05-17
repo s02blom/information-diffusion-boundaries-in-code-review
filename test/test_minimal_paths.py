@@ -63,7 +63,7 @@ class self(unittest.TestCase):
             "Single-source Dijkstra implementations are not equivalent",
         )
 
-    def test_empy_network(self):
+    def test_empty_network(self):
         result1 = single_source_dijkstra_vertices(
             self.cn, "v1", DistanceType.FASTEST, min_timing=0
         )
