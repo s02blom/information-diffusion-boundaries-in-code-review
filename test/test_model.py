@@ -1,6 +1,6 @@
 import unittest
 
-from simulation.model import CommunicationNetwork
+from simulation.model import CommunicationNetwork, EntityNotFound
 
 
 class test_model(unittest.TestCase):
@@ -29,9 +29,14 @@ class test_model(unittest.TestCase):
         self.assertEqual(self.empty_cn.hyperedges("v1"), {"h1"})
 
     def test_invalid_vertices(self):
-        pass
+        with self.assertRaises(EntityNotFound):
+            self.empty_cn.vertices("v3")
 
     def test_invalid_hyperedges(self):
+        with self.assertRaises(EntityNotFound):
+            self.empty_cn.hyperedges("h2")
+
+    def test_timings(self):
         pass
 
 
