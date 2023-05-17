@@ -7,7 +7,7 @@ from simulation.minimal_paths import (
 )
 
 
-class self(unittest.TestCase):
+class test_minimal_path(unittest.TestCase):
     def __init__(self, methodName: str = "runTest") -> None:
         super().__init__(methodName)
         self.cn = CommunicationNetwork(
