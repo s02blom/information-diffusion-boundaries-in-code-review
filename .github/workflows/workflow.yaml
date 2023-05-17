@@ -7,6 +7,7 @@ jobs:
         strategy:
             matrix:
                 python-version: ['3.10', '3.11']
+                with-orjson: [True, False]
         steps:
             - name: Checkout Main
               uses: actions/checkout@main
@@ -17,6 +18,10 @@ jobs:
                   python-version: ${{matrix.python-version}}
                   architecture: x64
             
+            - name: Installing Orjson
+              if: with-orjson
+                run: pip install orjson
+
             - name: Install requirments
               run: pip install -r requirements.txt
             
