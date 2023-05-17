@@ -19,7 +19,9 @@ jobs:
                   architecture: x64
 
             - name: Install requirments
-              run: pip install -r requirements.txt
+              run: |
+              pip install --upgrade pip
+              pip install -r requirements.txt
             
             - name: Installing Orjson
               if: ${{matrix.with-orjson}}
