@@ -1,5 +1,5 @@
 name: Main Workflow
-run-name: Started by ${{github.actor}}, for push ${{github.event_name}}
+run-name: Started by ${{github.actor}}, for push to ${{github.ref}}
 on: [push]
 jobs:
     run-tests:
