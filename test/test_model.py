@@ -10,7 +10,7 @@ class self(unittest.TestCase):
             {"h1": ["v1", "v2"], "h2": ["v2", "v3"], "h3": ["v3", "v4"]},
             {"h1": 1, "h2": 2, "h3": 3},
         )
-        self.cn2 = CommunicationNetwork({"h1": ["v1"]}, {"h1": 0})
+        self.empty_cn = CommunicationNetwork({"h1": ["v1"]}, {"h1": 0})
 
     def test_vertices_cn1(self):
         self.assertEqual(len(self.cn.vertices()), 4)
@@ -20,11 +20,13 @@ class self(unittest.TestCase):
         self.assertEqual(len(self.cn.hyperedges()), 3)
         self.assertEqual(self.cn.hyperedges("v1"), {"h1"})
 
-    def test_vertices_cn2(self):
-        pass
+    def test_vertices_empty_cn(self):
+        self.assertEqual(len(self.empty_cn.vertices()), 1)
+        self.assertEqual(self.empty_cn.vertices("h1"), {"v1"})
 
-    def test_hyperedges_cn2(self):
-        pass
+    def test_hyperedges_empty_cn(self):
+        self.assertEqual(len(self.empty_cn.hyperedges()), 1)
+        self.assertEqual(self.empty_cn.hyperedges("v1"), {"h1"})
 
 
 class ModelDataTest(unittest.TestCase):
