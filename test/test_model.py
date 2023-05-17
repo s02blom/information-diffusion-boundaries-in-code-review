@@ -3,7 +3,7 @@ import unittest
 from simulation.model import CommunicationNetwork
 
 
-class self(unittest.TestCase):
+class test_model(unittest.TestCase):
     def __init__(self, methodName: str = "runTest") -> None:
         super().__init__(methodName)
         self.cn = CommunicationNetwork(
@@ -47,4 +47,5 @@ class ModelDataTest(unittest.TestCase):
         self.assertEqual(len(communciation_network.hyperedges()), 309740)
 
 
-unittest.main()
+if __name__ == "__main__":
+    unittest.main()
