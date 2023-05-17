@@ -73,4 +73,5 @@ class self(unittest.TestCase):
         self.assertNotEqual(result1, result2)
 
 
-unittest.main()
+if __name__ == "__main__":
+    unittest.main()
