@@ -9,8 +9,8 @@ jobs:
                 python-version: ['3.10', '3.11']
                 with-orjson: [True, False]
         steps:
-            - name: Checkout ${{github.ref_name}}
-              uses: actions/checkout@${{github.ref_name}}
+            - name: Checkout Main
+              uses: actions/checkout@main
             
             - name: Setup Pyhon
               uses: actions/setup-python@v3
