@@ -19,8 +19,8 @@ jobs:
                   architecture: x64
             
             - name: Installing Orjson
-              if: with-orjson
-                run: pip install orjson
+              if: ${{with-orjson}}
+              run: pip install orjson
 
             - name: Install requirments
               run: pip install -r requirements.txt
