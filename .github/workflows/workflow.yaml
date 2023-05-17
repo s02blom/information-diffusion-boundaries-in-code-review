@@ -20,8 +20,8 @@ jobs:
 
             - name: Install requirments
               run: pip install -r requirements.txt
-              
-            . name: Install Orjson  
+            
+            - name: Installing Orjson
               if: ${{matrix.with-orjson}}
               run: pip install orjson
             
