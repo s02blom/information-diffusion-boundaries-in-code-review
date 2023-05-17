@@ -14,7 +14,7 @@ class self(unittest.TestCase):
             {"h1": ["v1", "v2"], "h2": ["v2", "v3"], "h3": ["v3", "v4"]},
             {"h1": 1, "h2": 2, "h3": 3},
         )
-        self.cn2 = CommunicationNetwork({"h1": ["v1,v1"]}, {"h1": 0})
+        self.cn2 = CommunicationNetwork({"h1": ["v1"]}, {"h1": 0})
 
     def test_short_correct(self):
         self.assertEqual(
