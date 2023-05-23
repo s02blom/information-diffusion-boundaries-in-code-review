@@ -37,7 +37,30 @@ class test_model(unittest.TestCase):
             self.empty_cn.hyperedges("h2")
 
     def test_timings(self):
-        pass
+        with self.assertRaises(EntityNotFound):
+            self.empty_cn.timings("h2")
+
+
+class CommunicationNetworkTest(unittest.TestCase):
+    def __init__(self, methodName: str = "runTest") -> None:
+        super().__init__(methodName)
+        self.cn = CommunicationNetwork(
+            {"h1": ["v1", "v2"], "h2": ["v2", "v3"], "h3": ["v3", "v4"]},
+            {"h1": 1, "h2": 2, "h3": 3},
+        )
+        self.empty_cn = CommunicationNetwork({"h1": ["v1"]}, {"h1": 0})
+
+    def test_channels(self):
+        self.assertEqual(len(self.cn.channels()), 3)
+        self.assertEqual(self.cn.channels("v1"), {"h1"})
+
+    def test_participants(self):
+        self.assertEqual(len(self.empty_cn.participants()), 1)
+        self.assertEqual(self.empty_cn.participants("h1"), {"v1"})
+
+    def test_invalid_file_path(self):
+        with self.assertRaises(EntityNotFound):
+            self.empty_cn.from_json("", None)
 
 
 class ModelDataTest(unittest.TestCase):
