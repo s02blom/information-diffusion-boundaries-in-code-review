@@ -49,6 +49,36 @@ class CommunicationNetworkTest(unittest.TestCase):
             {"h1": 1, "h2": 2, "h3": 3},
         )
         self.empty_cn = CommunicationNetwork({"h1": ["v1"]}, {"h1": 0})
+    
+    def setUp(self):
+        channels = {"h1": ["v1", "v2"], "h2": ["v2", "v3"], "h3": ["v3", "v4"]}
+        channel_timing = {"h1":1, "h2":2, "h3":3}
+        self.cn = CommunicationNetwork(channels, channel_timing)
+
+    def invalid_vert_test(self):
+        invalid_vert = "v69"
+        with self.assertRaises(EntityNotFound) as context:
+            self.cn.vertices(invalid_vert)
+            self.assertEqual(str(context.exception), f"Unkown vertex {invalid_vert}")
+        
+    def invalid_hyp_edge_test(self):
+        invalid_hyp_edge = "h69"
+        with self.assertRaises(EntityNotFound) as context:
+            self.cn.hyperedges(invalid_hyp_edge)
+            self.assertEqual(str(context.exception), f"Unkown hyperedge {invalid_hyp_edge}")
+
+    def timing_for_vert_test(self):
+        vertex = "v3"
+        expected_timing = 2
+        timings = self.cn.timings(vertex)
+        self.assertEqual(timings, expected_timing)
+    
+    def timing_for_hyp_edge_test(self):
+        hyper_edge = "h2"
+        expected_timing = 2
+        timings = self.cn.timings(hyper_edge)
+        self.assertEqual(timings, expected_timing)
+
 
     def test_channels(self):
         self.assertEqual(len(self.cn.channels()), 3)
