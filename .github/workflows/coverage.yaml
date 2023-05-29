@@ -1,0 +1,21 @@
+name: Coverage Workflow
+run-name: Started by ${{github.actor}}, for push to ${{github.ref}}
+on: [push]
+jobs:
+    run_coverage:
+        runs_on: ubunto-latest
+        steps:
+            - name: Checkout Main
+              uses: actions/checkout@main
+            
+            - name: Setup Pyhon
+              uses: actions/setup-python@v3
+  
+            - name: Install requirments
+              run: |
+                pip install --upgrade pip
+                pip install -r requirements.txt
+                pip install orjson
+            
+            - name: Run coverage
+              run: coverage run -m unittest discover  
