@@ -16,7 +16,7 @@ class test_notebook_plot(unittest.TestCase):
             print("no File")
 
     def setup(self):
-        if not self.flag:
+        if self.flag:
             self.fail("File does not exist")
     
     def test_compute_in_notebook(self):
