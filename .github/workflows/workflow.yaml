@@ -1,4 +1,4 @@
-name: Test Workflow
+name: Main Workflow
 run-name: Started by ${{github.actor}}, for push to ${{github.ref}}
 on: [push]
 jobs:
@@ -28,4 +28,24 @@ jobs:
               run: pip install orjson
             
             - name: Run tests
-              run: python -m unittest discover
+              run: |
+              python -m test/test_minimal_paths.py
+              python -m test/test_model.py
+
+    run-coverage:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Main
+              uses: actions/checkout@main
+            
+            - name: Setup Pyhon
+              uses: actions/setup-python@v3
+  
+            - name: Install requirments
+              run: |
+                pip install --upgrade pip
+                pip install -r requirements.txt
+                pip install orjson
+            
+            - name: Run coverage
+              run: coverage run -m unittest discover  
