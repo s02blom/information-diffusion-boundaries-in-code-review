@@ -82,6 +82,23 @@ class test_minimal_path(unittest.TestCase):
             ),
             0,
         )
+    
+    def test_unreachable_vert(self):
+        cn = CommunicationNetwork(
+            {"h1": ["v1", "v2"], "h2": ["v2", "v3"], "h3": ["v3", "v4"]}, {"h1":1, "h2":2, "h3":3},
+        )
+        src_vert = "v1"
+        unreachable_vert = "v4"
+        hyp_edge_distance = single_source_dijkstra_hyperedges(cn, src_vert, DistanceType.SHORTEST)
+        self.assertEqual(hyp_edge_distance[unreachable_vert], float("inf"), "Distance to the unreachable vertex is not equal to infinity")
+        vert_distance = single_source_dijkstra_vertices(cn, src_vert, DistanceType.SHORTEST)
+        self.assertEqual(vert_distance[unreachable_vert], float("inf"), "Distance to the unreachable vertex is not equal to infinity")
+
+    
+    def test_src_vert_not_present(self):
+        results = single_source_dijkstra_hyperedges(self.cn1, "v69", DistanceType.SHORTEST)
+        self.assertEqual(results, {})
+
 
     def test_non_connected_network(self):
         self.assertEqual(single_source_dijkstra_hyperedges(self.cn3,"v1",DistanceType.FASTEST,min_timing=0),single_source_dijkstra_vertices(self.cn3,"v1",DistanceType.FASTEST,min_timing=0))
