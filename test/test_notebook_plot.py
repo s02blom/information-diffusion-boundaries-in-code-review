@@ -2,7 +2,8 @@
 import unittest
 import importlib
 import os.path
-
+import pandas as pd
+import numpy as np
 class test_notebook_plot(unittest.TestCase):
     
     @classmethod
@@ -11,8 +12,13 @@ class test_notebook_plot(unittest.TestCase):
             self.notebook = importlib.import_module("ipynb.fs.full.plot")
         else:
             print("no File")
+
     
-    def test_one(self):
-        self.assertEqual((1+1), 2)
+    def test_compute_in_notebook(self):
+        empy_numpy_array = np.zeroes(4,4)
+        empty_dataframe = pd.DataFrame(empy_numpy_array)
+        with self.assertRaises(TypeError):
+            self.notebook.compute(empty_dataframe)
+        
     
     
