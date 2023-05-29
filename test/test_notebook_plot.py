@@ -8,11 +8,16 @@ class test_notebook_plot(unittest.TestCase):
     
     @classmethod
     def setUpClass(self) -> None:
+        self.flag = True
         if(os.path.isfile('data/minimal_paths/microsoft.pickle.bz2')):
             self.notebook = importlib.import_module("ipynb.fs.full.plot")
         else:
+            self.flag = False
             print("no File")
 
+    def setup(self):
+        if not self.flag:
+            self.fail("File does not exist")
     
     def test_compute_in_notebook(self):
         empy_numpy_array = np.zeroes(4,4)
