@@ -29,8 +29,8 @@ jobs:
             
             - name: Run tests
               run: |
-              python test/test_minimal_paths.py
-              python test/test_model.py
+              python -m test/test_minimal_paths.py
+              python -m test/test_model.py
 
     run-coverage:
         runs-on: ubuntu-latest
