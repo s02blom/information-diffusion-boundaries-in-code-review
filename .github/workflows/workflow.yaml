@@ -28,9 +28,7 @@ jobs:
               run: pip install orjson
             
             - name: Run tests
-              run: |
-              python -m test/test_minimal_paths.py
-              python -m test/test_model.py
+              run: python -m unittest discover
 
     run-coverage:
         runs-on: ubuntu-latest
@@ -45,6 +43,7 @@ jobs:
               run: |
                 pip install --upgrade pip
                 pip install -r requirements.txt
+                pip install coverage
                 pip install orjson
             
             - name: Run coverage
