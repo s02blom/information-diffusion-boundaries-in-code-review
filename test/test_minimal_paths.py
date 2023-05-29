@@ -89,7 +89,6 @@ class test_minimal_path(unittest.TestCase):
     def test_connected_distance(self):
         self.assertEqual(single_source_dijkstra_vertices(self.cn3,"v1", DistanceType.SHORTEST,min_timing=0),{})
     def test_deep_connection_network(self):
-       # print(single_source_dijkstra_hyperedges(self.cn5,"v1",DistanceType.FASTEST,min_timing=0))
         self.assertEqual(single_source_dijkstra_hyperedges(self.cn5,"v1",DistanceType.FOREMOST,min_timing=0),{"v2":1})
 
 if __name__ == "__main__":
